@@ -14,5 +14,5 @@ return array(
 	'logout' => 'auth/logout',
 	'task/logout' => 'auth/logout',
 	'task/([0-9]+)' => 'task/index/$1',
-	'task' => 'task/index/1',
+	'task' => 'task/index/1'
 );

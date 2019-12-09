@@ -68,17 +68,25 @@ class TaskController
 
 	public function actionUpdate($id)
 	{
-		if (isset($_POST['task'])){
-			$completed = isset($_POST['bar']);
-			Task::editTask($id, $_POST['task'], $completed);
+		if ($_SESSION['name'] == 'admin') {
+			if (($_POST['task'] != $task = Task::getTask($id)['task']) || 
+				(($completed = isset($_POST['bar'])) != Task::getTask($id)['completed'])) // дело было к вечеру, и я задолбался
+			{
 
-			require_once ROOT . '/views/updated.php';
+				Task::editTask($id, $_POST['task'], $completed);
+
+				require_once ROOT . '/views/updated.php';
+
+			}
+
+			else {
+				self::actionNotFound();
+			}
 		}
 
 		else {
-			self::actionNotFound();
-		}
-		
+			require_once ROOT . '/views/auth/login.php';
+		}		
 	}
 
 	public static function actionNotFound()

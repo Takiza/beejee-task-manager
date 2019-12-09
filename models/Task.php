@@ -39,7 +39,7 @@ class Task
 
 		$row = $result->fetch_assoc();
 
-		return $row['task'];
+		return $row;
 	}
 
 
